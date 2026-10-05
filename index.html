@@ -1,0 +1,3980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMW - mathematics in the modern world</title>
+
+<style>
+:root{
+    --bg:#080a10;
+    --panel:#111522;
+    --panel2:#171d2c;
+    --gold:#d9b86c;
+    --gold2:#f5d98c;
+    --text:#f4f1e8;
+    --muted:#9da5ba;
+    --green:#43d596;
+    --red:#ff5968;
+    --blue:#6ba8ff;
+    --border:rgba(217,184,108,.28);
+    --shadow:0 20px 65px rgba(0,0,0,.5);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    color:var(--text);
+    font-family:Georgia,"Times New Roman",serif;
+    background:
+        radial-gradient(circle at 50% -10%,rgba(217,184,108,.16),transparent 34%),
+        radial-gradient(circle at 0% 100%,rgba(70,110,180,.10),transparent 35%),
+        var(--bg);
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.app{
+    width:min(1150px,94%);
+    margin:auto;
+    padding:25px 0 50px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    text-align:center;
+    padding:20px 8px 24px;
+}
+
+.laurel{
+    color:var(--gold);
+    font-size:30px;
+    letter-spacing:12px;
+    opacity:.8;
+}
+
+.eyebrow{
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    margin-top:7px;
+}
+
+h1{
+    margin:9px 0;
+    font-size:clamp(27px,5vw,54px);
+    line-height:1.1;
+    text-transform:uppercase;
+}
+
+.subtitle{
+    color:var(--muted);
+    max-width:720px;
+    margin:auto;
+    line-height:1.6;
+}
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+.panel{
+    background:
+        linear-gradient(145deg,rgba(23,29,44,.97),rgba(11,14,23,.97));
+    border:1px solid var(--border);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    padding:24px;
+}
+
+.section-title{
+    color:var(--gold2);
+    font-size:20px;
+    margin:0 0 14px;
+}
+
+.divider{
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        var(--border),
+        transparent
+    );
+    margin:22px 0;
+}
+
+/* =========================================================
+   HOME
+========================================================= */
+
+.setup-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:15px;
+}
+
+.setting{
+    background:rgba(255,255,255,.025);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:15px;
+    padding:16px;
+}
+
+.setting label{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:9px;
+}
+
+select{
+    width:100%;
+    padding:12px;
+    color:var(--text);
+    background:#0b0f19;
+    border:1px solid rgba(217,184,108,.3);
+    border-radius:10px;
+}
+
+.topic-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.topic-btn{
+    padding:9px 13px;
+    color:var(--muted);
+    background:#0b0f19;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:999px;
+    transition:.2s;
+}
+
+.topic-btn.active{
+    color:var(--gold2);
+    background:rgba(217,184,108,.12);
+    border-color:var(--gold);
+}
+
+.topic-btn:hover{
+    transform:translateY(-1px);
+}
+
+.action-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:20px;
+}
+
+.primary{
+    flex:1;
+    min-width:190px;
+    padding:15px 20px;
+    border:0;
+    border-radius:13px;
+    color:#171209;
+    background:linear-gradient(
+        135deg,
+        var(--gold2),
+        var(--gold)
+    );
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.secondary{
+    padding:14px 18px;
+    color:var(--text);
+    background:#0c101b;
+    border:1px solid var(--border);
+    border-radius:13px;
+}
+
+.primary:hover,
+.secondary:hover{
+    transform:translateY(-1px);
+}
+
+.symbol-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.symbol{
+    padding:11px;
+    border-radius:10px;
+    background:#0b0f19;
+    border:1px solid rgba(255,255,255,.07);
+}
+
+.symbol b{
+    color:var(--gold2);
+    font-size:18px;
+}
+
+.symbol span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    margin-top:3px;
+}
+
+/* =========================================================
+   QUIZ TOP
+========================================================= */
+
+.quiz-top{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:15px;
+    align-items:center;
+}
+
+.progress-wrap{
+    height:10px;
+    overflow:hidden;
+    background:#070a10;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:20px;
+}
+
+.progress{
+    height:100%;
+    width:0%;
+    background:linear-gradient(
+        90deg,
+        var(--gold),
+        var(--gold2)
+    );
+    transition:.3s;
+}
+
+.stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:flex-end;
+}
+
+.stat{
+    padding:8px 11px;
+    background:#0a0e17;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:10px;
+    font-size:11px;
+}
+
+.stat b{
+    color:var(--gold2);
+}
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+.question-panel{
+    margin-top:18px;
+}
+
+.badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:13px;
+}
+
+.badge{
+    padding:7px 11px;
+    background:#0b0f19;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:999px;
+    font-size:10px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.badge.keyword{
+    color:var(--gold2);
+    background:rgba(217,184,108,.08);
+    border-color:rgba(217,184,108,.45);
+}
+
+.question{
+    margin:10px 0 20px;
+    font-size:clamp(20px,3vw,29px);
+    line-height:1.45;
+}
+
+.choices{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.choice{
+    position:relative;
+    min-height:64px;
+    padding:14px 15px 14px 52px;
+    text-align:left;
+    color:var(--text);
+    background:#0b0f19;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:14px;
+    transition:.18s;
+}
+
+.choice:hover{
+    background:#111725;
+    border-color:rgba(217,184,108,.55);
+}
+
+.choice.disabled{
+    cursor:default;
+}
+
+.choice-letter{
+    position:absolute;
+    left:14px;
+    top:50%;
+    width:28px;
+    height:28px;
+    transform:translateY(-50%);
+    display:grid;
+    place-items:center;
+    color:var(--gold2);
+    background:#1a2130;
+    border-radius:50%;
+    font-weight:bold;
+}
+
+.choice.correct{
+    color:var(--green);
+    border-color:var(--green);
+    background:rgba(67,213,150,.09);
+}
+
+.choice.wrong{
+    color:var(--red);
+    border-color:var(--red);
+    background:rgba(255,89,104,.09);
+}
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.result{
+    margin-top:18px;
+    padding:17px;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.result.good{
+    background:rgba(67,213,150,.06);
+    border-color:rgba(67,213,150,.4);
+}
+
+.result.bad{
+    background:rgba(255,89,104,.06);
+    border-color:rgba(255,89,104,.4);
+}
+
+.result-title{
+    font-size:19px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.answer-line{
+    margin:7px 0;
+    padding:10px 12px;
+    background:rgba(0,0,0,.18);
+    border-radius:9px;
+    line-height:1.5;
+}
+
+.answer-line b{
+    color:var(--gold2);
+}
+
+.explanation{
+    margin-top:12px;
+    color:#d9d9df;
+    line-height:1.6;
+}
+
+.choice-breakdown{
+    display:grid;
+    gap:7px;
+    margin-top:13px;
+}
+
+.breakdown-item{
+    padding:8px 10px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.5;
+    border-left:2px solid rgba(255,255,255,.12);
+}
+
+/* =========================================================
+   TRUTH TABLE
+========================================================= */
+
+.truth-intro{
+    color:var(--muted);
+    line-height:1.65;
+}
+
+.truth-expression{
+    margin:18px 0;
+    padding:16px;
+    text-align:center;
+    color:var(--gold2);
+    background:#080c14;
+    border:1px solid rgba(217,184,108,.25);
+    border-radius:14px;
+    font-family:"Courier New",monospace;
+    font-size:clamp(22px,4vw,34px);
+}
+
+.truth-instruction{
+    margin:0 0 15px;
+    padding:12px;
+    color:var(--gold2);
+    background:rgba(217,184,108,.07);
+    border-left:3px solid var(--gold);
+    border-radius:8px;
+    line-height:1.5;
+}
+
+.table-scroll{
+    overflow-x:auto;
+    border-radius:14px;
+}
+
+.truth-table{
+    width:100%;
+    min-width:530px;
+    border-collapse:collapse;
+}
+
+.truth-table th,
+.truth-table td{
+    padding:11px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.truth-table th{
+    color:var(--gold2);
+    background:#181e2d;
+    font-family:"Courier New",monospace;
+}
+
+.truth-table td{
+    background:#0d111c;
+}
+
+.truth-input{
+    width:65px;
+    height:45px;
+    padding:5px;
+    text-align:center;
+    color:var(--gold2);
+    background:#070b12;
+    border:2px solid rgba(255,255,255,.13);
+    border-radius:9px;
+    outline:none;
+    font-size:20px;
+    font-weight:bold;
+    font-family:"Courier New",monospace;
+    text-transform:uppercase;
+}
+
+.truth-input:focus{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(217,184,108,.08);
+}
+
+.truth-input.correct-cell{
+    color:var(--green);
+    border-color:var(--green);
+    background:rgba(67,213,150,.08);
+}
+
+.truth-input.wrong-cell{
+    color:var(--red);
+    border-color:var(--red);
+    background:rgba(255,89,104,.08);
+}
+
+.truth-input.invalid-cell{
+    border-color:var(--red);
+}
+
+.cell-label{
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* =========================================================
+   END
+========================================================= */
+
+.end{
+    text-align:center;
+}
+
+.final-score{
+    color:var(--gold2);
+    font-size:65px;
+    font-weight:bold;
+}
+
+.final-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin:20px 0;
+}
+
+.final-stat{
+    padding:15px;
+    background:#0b0f19;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:13px;
+}
+
+.final-stat b{
+    display:block;
+    margin-bottom:4px;
+    color:var(--gold2);
+    font-size:23px;
+}
+
+.mistakes{
+    margin-top:25px;
+    text-align:left;
+}
+
+.mistake{
+    margin:8px 0;
+    padding:14px;
+    background:#0b0f19;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:13px;
+    line-height:1.5;
+}
+
+.mistake strong{
+    color:var(--gold2);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    margin-top:20px;
+    color:#697083;
+    text-align:center;
+    font-size:12px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+    .setup-grid,
+    .choices{
+        grid-template-columns:1fr;
+    }
+
+    .symbol-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .quiz-top{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        justify-content:flex-start;
+    }
+
+    .final-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:420px){
+
+    .app{
+        width:96%;
+    }
+
+    .panel{
+        padding:16px;
+    }
+
+    .symbol-grid{
+        grid-template-columns:1fr;
+    }
+
+    .truth-input{
+        width:52px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="hero">
+
+    <div class="laurel">◈ ◇ ◈</div>
+
+    <div class="eyebrow">
+        Academy of Mathematical Reasoning
+    </div>
+
+    <h1>
+        MMW - mathematics in the modern world
+    </h1>
+
+    <p class="subtitle">
+        Logic. Sets. Reasoning. Algebra. Relations.
+        Functions. Truth tables.
+    </p>
+
+</header>
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<section id="home" class="panel">
+
+    <h2 class="section-title">
+        ⚔ Enter the Academy
+    </h2>
+
+    <div class="setup-grid">
+
+        <div class="setting">
+
+            <label>Question Mode</label>
+
+            <select id="modeSelect">
+
+                <option value="mixed">
+                    Mixed Academy
+                </option>
+
+                <option value="normal">
+                    Normal Questions
+                </option>
+
+                <option value="truth">
+                    Truth Table Trial
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="setting">
+
+            <label>Question Count</label>
+
+            <select id="countSelect">
+
+                <option value="10">
+                    10 Questions
+                </option>
+
+                <option value="20" selected>
+                    20 Questions
+                </option>
+
+                <option value="30">
+                    30 Questions
+                </option>
+
+                <option value="40">
+                    40 Questions
+                </option>
+
+                <option value="50">
+                    50 Questions
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <h3 class="section-title">
+        Choose Your Domain
+    </h3>
+
+
+    <div class="topic-grid" id="topicGrid">
+
+        <button class="topic-btn active" data-topic="ALL">
+            ALL
+        </button>
+
+        <button class="topic-btn" data-topic="LOGIC">
+            LOGIC
+        </button>
+
+        <button class="topic-btn" data-topic="SETS">
+            SETS
+        </button>
+
+        <button class="topic-btn" data-topic="VENN">
+            VENN & OPS
+        </button>
+
+        <button class="topic-btn" data-topic="BINARY">
+            BINARY
+        </button>
+
+        <button class="topic-btn" data-topic="REASONING">
+            REASONING
+        </button>
+
+        <button class="topic-btn" data-topic="ALGEBRA">
+            ALGEBRA
+        </button>
+
+        <button class="topic-btn" data-topic="RELATIONS">
+            RELATIONS
+        </button>
+
+        <button class="topic-btn" data-topic="FUNCTIONS">
+            FUNCTIONS
+        </button>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <h3 class="section-title">
+        📜 Symbol Codex
+    </h3>
+
+
+    <div class="symbol-grid">
+
+        <div class="symbol">
+            <b>~</b>
+            <span>NOT</span>
+        </div>
+
+        <div class="symbol">
+            <b>∧</b>
+            <span>AND</span>
+        </div>
+
+        <div class="symbol">
+            <b>∨</b>
+            <span>OR</span>
+        </div>
+
+        <div class="symbol">
+            <b>→</b>
+            <span>IF...THEN</span>
+        </div>
+
+        <div class="symbol">
+            <b>↔</b>
+            <span>IF AND ONLY IF</span>
+        </div>
+
+        <div class="symbol">
+            <b>∈</b>
+            <span>ELEMENT OF</span>
+        </div>
+
+        <div class="symbol">
+            <b>∉</b>
+            <span>NOT AN ELEMENT</span>
+        </div>
+
+        <div class="symbol">
+            <b>∪</b>
+            <span>UNION / OR</span>
+        </div>
+
+        <div class="symbol">
+            <b>∩</b>
+            <span>INTERSECTION / COMMON</span>
+        </div>
+
+        <div class="symbol">
+            <b>Aᶜ</b>
+            <span>COMPLEMENT</span>
+        </div>
+
+        <div class="symbol">
+            <b>×</b>
+            <span>CARTESIAN PRODUCT</span>
+        </div>
+
+        <div class="symbol">
+            <b>⊆</b>
+            <span>SUBSET</span>
+        </div>
+
+        <div class="symbol">
+            <b>⊂</b>
+            <span>PROPER SUBSET</span>
+        </div>
+
+        <div class="symbol">
+            <b>|A|</b>
+            <span>CARDINALITY</span>
+        </div>
+
+        <div class="symbol">
+            <b>2ⁿ</b>
+            <span>TOTAL SUBSETS</span>
+        </div>
+
+    </div>
+
+
+    <div class="action-row">
+
+        <button class="primary" id="startBtn">
+            ENTER THE ACADEMY
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     QUIZ
+===================================================== -->
+
+<section id="quiz" class="hidden">
+
+<div class="panel">
+
+    <div class="quiz-top">
+
+        <div>
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                margin-bottom:7px;
+            ">
+
+                <span id="progressText">
+                    Question 1 / 20
+                </span>
+
+                <span id="timerText">
+                    00:00
+                </span>
+
+            </div>
+
+            <div class="progress-wrap">
+
+                <div
+                    class="progress"
+                    id="progressBar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+                SCORE
+                <b id="scoreText">0</b>
+            </div>
+
+            <div class="stat">
+                STREAK
+                <b id="streakText">0</b>
+            </div>
+
+            <div class="stat">
+                CORRECT
+                <b id="correctText">0</b>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NORMAL -->
+
+    <div id="normalQuestion" class="question-panel">
+
+        <div class="badges">
+
+            <span
+                class="badge"
+                id="topicBadge">
+                LOGIC
+            </span>
+
+            <span
+                class="badge keyword"
+                id="keywordBadge">
+                KEYWORD: NOT
+            </span>
+
+        </div>
+
+
+        <div
+            class="question"
+            id="questionText">
+        </div>
+
+
+        <div
+            class="choices"
+            id="choices">
+        </div>
+
+
+        <div id="normalResult"></div>
+
+
+        <div class="action-row">
+
+            <button
+                class="primary hidden"
+                id="nextBtn">
+                NEXT QUESTION →
+            </button>
+
+            <button
+                class="secondary"
+                id="quitBtn">
+                QUIT
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- TRUTH TABLE -->
+
+    <div
+        id="truthQuestion"
+        class="question-panel hidden">
+
+        <div class="badges">
+
+            <span class="badge">
+                TRUTH TABLE
+            </span>
+
+            <span
+                class="badge keyword"
+                id="truthKeyword">
+                KEYWORD: NOT
+            </span>
+
+        </div>
+
+
+        <div class="truth-intro">
+
+            You are not selecting the answer here.
+            <b style="color:var(--gold2)">
+                You must type it yourself.
+            </b>
+
+            Every result cell requires either
+            <b style="color:var(--green)">T</b>
+            or
+            <b style="color:var(--red)">F</b>.
+
+        </div>
+
+
+        <div class="truth-expression" id="truthExpression">
+            p → q
+        </div>
+
+
+        <div class="truth-instruction">
+
+            <b>HOW TO ANSWER:</b>
+            Type <b>T</b> for TRUE or <b>F</b> for FALSE.
+            Lowercase <b>t/f</b> is also accepted.
+            Press <b>Tab</b> to move through the cells.
+
+        </div>
+
+
+        <div class="table-scroll">
+
+            <table
+                class="truth-table"
+                id="truthTable">
+            </table>
+
+        </div>
+
+
+        <div id="truthResult"></div>
+
+
+        <div class="action-row">
+
+            <button
+                class="primary"
+                id="checkTruthBtn">
+                CHECK TABLE
+            </button>
+
+            <button
+                class="primary hidden"
+                id="nextTruthBtn">
+                NEXT TRIAL →
+            </button>
+
+            <button
+                class="secondary"
+                id="truthQuitBtn">
+                QUIT
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     END
+===================================================== -->
+
+<section
+    id="end"
+    class="panel end hidden">
+
+    <div class="eyebrow">
+        Academy Trial Complete
+    </div>
+
+    <h2 class="section-title">
+        Your Final Score
+    </h2>
+
+    <div
+        class="final-score"
+        id="finalScore">
+        0
+    </div>
+
+
+    <div id="finalMessage"></div>
+
+
+    <div class="final-grid">
+
+        <div class="final-stat">
+            <b id="finalCorrect">0</b>
+            Correct
+        </div>
+
+        <div class="final-stat">
+            <b id="finalWrong">0</b>
+            Wrong
+        </div>
+
+        <div class="final-stat">
+            <b id="finalAccuracy">0%</b>
+            Accuracy
+        </div>
+
+        <div class="final-stat">
+            <b id="finalBest">0</b>
+            Best
+        </div>
+
+    </div>
+
+
+    <div
+        class="mistakes"
+        id="mistakes">
+    </div>
+
+
+    <div class="action-row">
+
+        <button
+            class="primary"
+            id="againBtn">
+            RUN THE TRIAL AGAIN
+        </button>
+
+        <button
+            class="secondary"
+            id="homeBtn">
+            BACK TO ACADEMY
+        </button>
+
+    </div>
+
+</section>
+
+
+<div class="footer">
+    MMW Academy • Logic • Sets • Reasoning • Algebra • Relations • Functions
+</div>
+
+</div>
+
+
+<script>
+"use strict";
+
+/* =========================================================
+   QUESTION BANK
+========================================================= */
+
+const QUESTIONS = [
+
+/* ================= LOGIC ================= */
+
+{
+topic:"LOGIC",
+keyword:"NOT",
+q:"If p is TRUE, what is ~p?",
+options:["TRUE","FALSE","BOTH","UNDEFINED"],
+answer:1,
+why:"~ means NOT. Negation reverses the truth value, so NOT TRUE is FALSE.",
+choices:[
+"TRUE is the original value.",
+"FALSE is correct because ~ means NOT.",
+"BOTH is not the result of classical negation.",
+"UNDEFINED is unnecessary because p has a truth value."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"AND",
+q:"Which symbol means AND?",
+options:["∨","∧","→","↔"],
+answer:1,
+why:"∧ means AND. A conjunction is TRUE only when both propositions are TRUE.",
+choices:[
+"∨ means OR.",
+"∧ means AND.",
+"→ means IF...THEN.",
+"↔ means IF AND ONLY IF."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"OR",
+q:"Which symbol means OR?",
+options:["∧","~","∨","→"],
+answer:2,
+why:"∨ means OR. It is TRUE when at least one proposition is TRUE.",
+choices:[
+"∧ means AND.",
+"~ means NOT.",
+"∨ means OR.",
+"→ means IF...THEN."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"IF...THEN",
+q:"Which symbol means IF p, THEN q?",
+options:["p ∧ q","p ∨ q","p → q","p ↔ q"],
+answer:2,
+why:"→ is the conditional symbol. It means IF p, THEN q.",
+choices:[
+"∧ means AND.",
+"∨ means OR.",
+"→ means IF...THEN.",
+"↔ means IF AND ONLY IF."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"IF AND ONLY IF",
+q:"Which symbol means IF AND ONLY IF?",
+options:["→","∧","↔","~"],
+answer:2,
+why:"↔ is the biconditional symbol. It means IF AND ONLY IF.",
+choices:[
+"→ means IF...THEN.",
+"∧ means AND.",
+"↔ means IF AND ONLY IF.",
+"~ means NOT."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"CONDITIONAL",
+q:"When is p → q FALSE?",
+options:[
+"p=T, q=T",
+"p=T, q=F",
+"p=F, q=T",
+"p=F, q=F"
+],
+answer:1,
+why:"A conditional is FALSE only when p is TRUE and q is FALSE.",
+choices:[
+"T → T is TRUE.",
+"T → F is the only FALSE case.",
+"F → T is TRUE.",
+"F → F is TRUE."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"BICONDITIONAL",
+q:"When is p ↔ q TRUE?",
+options:[
+"When they differ",
+"When p is TRUE",
+"When they have the same value",
+"When q is FALSE"
+],
+answer:2,
+why:"↔ means IF AND ONLY IF. It is TRUE when p and q have the same truth value.",
+choices:[
+"Different values make it FALSE.",
+"p does not have to always be TRUE.",
+"Same truth values make the biconditional TRUE.",
+"q can be TRUE or FALSE."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"AND",
+q:"If p=T and q=F, what is p ∧ q?",
+options:["TRUE","FALSE","TAUTOLOGY","CONTINGENCY"],
+answer:1,
+why:"∧ means AND. Both values must be TRUE, but q is FALSE.",
+choices:[
+"AND is not TRUE when one input is FALSE.",
+"FALSE is correct because q is FALSE.",
+"Tautology classifies a whole expression.",
+"Contingency is not the row result."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"OR",
+q:"If p=F and q=T, what is p ∨ q?",
+options:["TRUE","FALSE","CONTRADICTION","UNDEFINED"],
+answer:0,
+why:"∨ means OR. At least one proposition must be TRUE. q is TRUE.",
+choices:[
+"TRUE is correct because q is TRUE.",
+"OR is FALSE only when both are FALSE.",
+"Contradiction is an expression classification.",
+"Nothing here is undefined."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"TAUTOLOGY",
+q:"An expression that is TRUE in every truth-table row is a...",
+options:["Contradiction","Contingency","Tautology","Negation"],
+answer:2,
+why:"A tautology is TRUE for every possible combination of truth values.",
+choices:[
+"Contradiction is always FALSE.",
+"Contingency has both TRUE and FALSE.",
+"Tautology is always TRUE.",
+"Negation is an operation."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"CONTRADICTION",
+q:"An expression that is FALSE in every truth-table row is a...",
+options:["Tautology","Contradiction","Contingency","Conjunction"],
+answer:1,
+why:"A contradiction is FALSE in every possible row.",
+choices:[
+"Tautology is always TRUE.",
+"Contradiction is always FALSE.",
+"Contingency contains both values.",
+"Conjunction is an operator."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"CONTINGENCY",
+q:"An expression containing BOTH TRUE and FALSE results is a...",
+options:["Tautology","Contradiction","Contingency","Biconditional"],
+answer:2,
+why:"A contingency contains at least one TRUE and at least one FALSE result.",
+choices:[
+"Tautology has only TRUE.",
+"Contradiction has only FALSE.",
+"Contingency has a mixture.",
+"Biconditional is an operator."
+]
+},
+
+{
+topic:"LOGIC",
+keyword:"PROPOSITION",
+q:"Which is a proposition?",
+options:[
+"Close the door!",
+"What is your name?",
+"7 is a prime number.",
+"Study harder!"
+],
+answer:2,
+why:"A proposition is a declarative statement that can be TRUE or FALSE.",
+choices:[
+"Commands do not have truth values.",
+"Questions do not have truth values.",
+"This declarative statement can be TRUE or FALSE.",
+"Commands do not have truth values."
+]
+},
+
+/* ================= SETS ================= */
+
+{
+topic:"SETS",
+keyword:"ELEMENT",
+q:"If A={2,4,6,8}, which is TRUE?",
+options:["5 ∈ A","6 ∈ A","9 ∈ A","3 ∈ A"],
+answer:1,
+why:"∈ means 'is an element of.' Since 6 appears in A, 6 ∈ A.",
+choices:[
+"5 is absent.",
+"6 is present in A.",
+"9 is absent.",
+"3 is absent."
+]
+},
+
+{
+topic:"SETS",
+keyword:"NOT ELEMENT",
+q:"If A={1,3,5}, which is TRUE?",
+options:["2 ∈ A","4 ∈ A","5 ∉ A","2 ∉ A"],
+answer:3,
+why:"∉ means 'is not an element of.' Since 2 is not in A, 2 ∉ A.",
+choices:[
+"2 is absent, so 2 ∈ A is false.",
+"4 is absent, so 4 ∈ A is false.",
+"5 is present, so 5 ∉ A is false.",
+"2 is absent, so 2 ∉ A is true."
+]
+},
+
+{
+topic:"SETS",
+keyword:"EMPTY SET",
+q:"A set containing NO elements is the...",
+options:["Universal set","Singleton","Empty set","Infinite set"],
+answer:2,
+why:"The empty set contains zero elements and is written ∅ or {}.",
+choices:[
+"Universal means all objects under consideration.",
+"Singleton means exactly one element.",
+"Empty means zero elements.",
+"Infinite means endlessly many elements."
+]
+},
+
+{
+topic:"SETS",
+keyword:"SINGLETON",
+q:"Which is a singleton?",
+options:["{1,2}","{5}","{}","{1,2,3}"],
+answer:1,
+why:"A singleton contains exactly one element. {5} has one element.",
+choices:[
+"This has two elements.",
+"This has exactly one element.",
+"This has zero elements.",
+"This has three elements."
+]
+},
+
+{
+topic:"SETS",
+keyword:"CARDINALITY",
+q:"If A={a,b,c,d,e}, what is |A|?",
+options:["3","4","5","6"],
+answer:2,
+why:"|A| means cardinality, or number of elements. A contains five.",
+choices:[
+"There are five elements, not three.",
+"There are five elements, not four.",
+"There are exactly five elements.",
+"There are not six elements."
+]
+},
+
+{
+topic:"SETS",
+keyword:"EQUAL SETS",
+q:"Which pair represents EQUAL sets?",
+options:[
+"A={1,2}, B={1,3}",
+"A={1,2}, B={2,1}",
+"A={1,2}, B={1,2,3}",
+"A={a,b}, B={1,2}"
+],
+answer:1,
+why:"Equal sets contain exactly the same elements. Order does not matter.",
+choices:[
+"They contain different elements.",
+"They contain the same elements.",
+"B has an extra element.",
+"Letters and numbers are different elements."
+]
+},
+
+{
+topic:"SETS",
+keyword:"EQUIVALENT SETS",
+q:"Equivalent sets have the same...",
+options:["Elements","Cardinality","Order","Symbols"],
+answer:1,
+why:"Equivalent sets have the same number of elements, even if their elements differ.",
+choices:[
+"Same elements describes equal sets.",
+"Same cardinality means same number of elements.",
+"Order is irrelevant.",
+"Symbols do not determine equivalence."
+]
+},
+
+{
+topic:"SETS",
+keyword:"SUBSET",
+q:"If A={1,2} and B={1,2,3}, which is TRUE?",
+options:["A ⊆ B","B ⊆ A","A ∉ B","B ∉ A"],
+answer:0,
+why:"Every element of A is also in B, so A ⊆ B.",
+choices:[
+"Every element of A is inside B.",
+"B contains 3, which is not in A.",
+"A is a set here, not an element.",
+"B is not an element of A."
+]
+},
+
+{
+topic:"SETS",
+keyword:"PROPER SUBSET",
+q:"If A={1,2} and B={1,2,3}, which is TRUE?",
+options:["A ⊂ B","A=B","A ⊃ B","A∉B"],
+answer:0,
+why:"A is contained in B and A is not equal to B, so A is a proper subset.",
+choices:[
+"A is smaller and contained in B.",
+"A and B are not equal.",
+"A is not a superset of B.",
+"A is not being treated as an element."
+]
+},
+
+{
+topic:"SETS",
+keyword:"2ⁿ",
+q:"A set has 4 elements. How many TOTAL subsets?",
+options:["4","8","16","20"],
+answer:2,
+why:"Total subsets = 2ⁿ. For n=4, 2⁴=16.",
+choices:[
+"4 is the number of elements.",
+"8 is 2³.",
+"2⁴ equals 16.",
+"20 is not the subset formula."
+]
+},
+
+{
+topic:"SETS",
+keyword:"2ⁿ − 1",
+q:"A set has 5 elements. How many PROPER subsets?",
+options:["16","25","31","32"],
+answer:2,
+why:"Total subsets = 2⁵=32. Proper subsets exclude the set itself, so 32−1=31.",
+choices:[
+"16 is 2⁴.",
+"25 is not the formula.",
+"31 is 32−1.",
+"32 includes the original set."
+]
+},
+
+/* ================= VENN ================= */
+
+{
+topic:"VENN",
+keyword:"UNION",
+q:"A ∪ B means...",
+options:[
+"Common elements",
+"Elements in A OR B",
+"Outside A",
+"Only A"
+],
+answer:1,
+why:"∪ means UNION. It contains elements in A, B, or both.",
+choices:[
+"Common elements are A ∩ B.",
+"Union combines A and B.",
+"Outside A is Aᶜ.",
+"Only A excludes B."
+]
+},
+
+{
+topic:"VENN",
+keyword:"INTERSECTION",
+q:"A ∩ B means...",
+options:[
+"All elements",
+"Common elements",
+"Outside B",
+"Outside A"
+],
+answer:1,
+why:"∩ means INTERSECTION. It contains elements shared by both sets.",
+choices:[
+"Union contains all unique elements.",
+"Intersection contains common elements.",
+"Outside B is Bᶜ.",
+"Outside A is Aᶜ."
+]
+},
+
+{
+topic:"VENN",
+keyword:"COMPLEMENT",
+q:"U={1,2,3,4,5}, A={1,3}. What is Aᶜ?",
+options:[
+"{1,3}",
+"{2,4,5}",
+"{1,2,3,4,5}",
+"{}"
+],
+answer:1,
+why:"Aᶜ contains everything in U that is NOT in A.",
+choices:[
+"This is A itself.",
+"These elements are in U but outside A.",
+"This is the entire universal set.",
+"The complement is not empty."
+]
+},
+
+{
+topic:"VENN",
+keyword:"UNION",
+q:"A={1,2,3}, B={3,4,5}. What is A ∪ B?",
+options:[
+"{3}",
+"{1,2,3,4,5}",
+"{1,2}",
+"{4,5}"
+],
+answer:1,
+why:"Union combines all unique elements from both sets.",
+choices:[
+"3 is the intersection.",
+"The union contains all five unique elements.",
+"These are only A-exclusive elements.",
+"These are only B-exclusive elements."
+]
+},
+
+{
+topic:"VENN",
+keyword:"INTERSECTION",
+q:"A={1,2,3}, B={3,4,5}. What is A ∩ B?",
+options:[
+"{1,2,3,4,5}",
+"{1,2}",
+"{3}",
+"{}"
+],
+answer:2,
+why:"The intersection contains only elements common to both sets. That is {3}.",
+choices:[
+"This is the union.",
+"These are only in A.",
+"3 appears in both sets.",
+"The intersection is not empty."
+]
+},
+
+{
+topic:"VENN",
+keyword:"CARTESIAN PRODUCT",
+q:"If |A|=2 and |B|=3, what is |A × B|?",
+options:["5","6","8","9"],
+answer:1,
+why:"Cartesian product size is |A||B|. Therefore 2×3=6 ordered pairs.",
+choices:[
+"2+3 is not the product rule.",
+"2×3 equals 6.",
+"8 is not the product.",
+"9 would be 3×3."
+]
+},
+
+{
+topic:"VENN",
+keyword:"ROSTER",
+q:"Which method lists every element explicitly?",
+options:["Rule","Roster","Graph","Function"],
+answer:1,
+why:"The roster method lists elements directly inside braces.",
+choices:[
+"Rule method describes a condition.",
+"Roster directly lists elements.",
+"Graph is not the set-listing method.",
+"Function is unrelated."
+]
+},
+
+/* ================= BINARY ================= */
+
+{
+topic:"BINARY",
+keyword:"CLOSURE",
+q:"An operation is CLOSED when...",
+options:[
+"The result leaves the set",
+"The result stays in the set",
+"Order changes",
+"Grouping changes"
+],
+answer:1,
+why:"Closure means operating on elements of a set produces another element of that same set.",
+choices:[
+"Leaving the set means closure fails.",
+"Staying in the set means closure.",
+"Changing order is commutativity.",
+"Changing grouping is associativity."
+]
+},
+
+{
+topic:"BINARY",
+keyword:"COMMUTATIVE",
+q:"Changing the ORDER without changing the result is...",
+options:["Associative","Closure","Commutative","Identity"],
+answer:2,
+why:"Commutative means changing the order does not change the result.",
+choices:[
+"Associative changes grouping.",
+"Closure concerns membership.",
+"Commutative concerns order.",
+"Identity concerns a neutral element."
+]
+},
+
+{
+topic:"BINARY",
+keyword:"ASSOCIATIVE",
+q:"Changing the GROUPING without changing the result is...",
+options:["Commutative","Associative","Closure","Inverse"],
+answer:1,
+why:"Associative means regrouping the operation does not change the result.",
+choices:[
+"Commutative changes order.",
+"Associative changes grouping.",
+"Closure concerns the set.",
+"Inverse is another property."
+]
+},
+
+{
+topic:"BINARY",
+keyword:"COMMUTATIVE",
+q:"Is subtraction commutative over R?",
+options:["Yes","No","Only for zero","Only for negatives"],
+answer:1,
+why:"Subtraction is generally not commutative because a−b usually differs from b−a.",
+choices:[
+"Subtraction fails the property generally.",
+"No is the correct answer.",
+"Zero does not make it universally commutative.",
+"Negative numbers do not fix it."
+]
+},
+
+{
+topic:"BINARY",
+keyword:"ASSOCIATIVE",
+q:"Is multiplication associative over R?",
+options:["Yes","No","Only integers","Only zero"],
+answer:0,
+why:"Multiplication is associative: (ab)c=a(bc).",
+choices:[
+"Multiplication is associative over real numbers.",
+"It does not fail generally.",
+"It also works for non-integers.",
+"It is not limited to zero."
+]
+},
+
+{
+topic:"BINARY",
+keyword:"CLOSURE",
+q:"Is subtraction CLOSED on the natural numbers?",
+options:["Always","No, not always","Only equal numbers","Only primes"],
+answer:1,
+why:"For example, 2−5=−3, which is not a natural number under the usual definition.",
+choices:[
+"Subtraction can produce a negative value.",
+"No, not always is correct.",
+"Equal values are only a special case.",
+"Prime numbers do not fix closure."
+]
+},
+
+/* ================= REASONING ================= */
+
+{
+topic:"REASONING",
+keyword:"DEDUCTIVE",
+q:"GENERAL → SPECIFIC reasoning is...",
+options:["Inductive","Deductive","Random","Analogical"],
+answer:1,
+why:"Deductive reasoning starts with a general rule and applies it to a specific case.",
+choices:[
+"Inductive goes specific → general.",
+"Deductive goes general → specific.",
+"Random reasoning has no logical direction.",
+"Analogy compares similar situations."
+]
+},
+
+{
+topic:"REASONING",
+keyword:"INDUCTIVE",
+q:"SPECIFIC → GENERAL reasoning is...",
+options:["Deductive","Inductive","Contradictory","Conditional"],
+answer:1,
+why:"Inductive reasoning uses specific observations to form a general conclusion.",
+choices:[
+"Deductive goes general → specific.",
+"Inductive goes specific → general.",
+"Contradictory is not the reasoning direction.",
+"Conditional is a logical form."
+]
+},
+
+{
+topic:"REASONING",
+keyword:"MODUS PONENS",
+q:"Given p → q and p, what follows?",
+options:["~q","~p","q","p ∧ ~q"],
+answer:2,
+why:"Modus Ponens: p → q, p, therefore q.",
+choices:[
+"~q does not follow.",
+"~p contradicts the given p.",
+"q follows by Modus Ponens.",
+"p ∧ ~q cannot follow."
+]
+},
+
+{
+topic:"REASONING",
+keyword:"MODUS PONENS",
+q:"If IF I STUDY THEN I IMPROVE, and I STUDIED, therefore...",
+options:[
+"I do not improve",
+"I improve",
+"I never studied",
+"Nothing follows"
+],
+answer:1,
+why:"This matches Modus Ponens: p→q, p, therefore q.",
+choices:[
+"This contradicts the conditional.",
+"This is the valid conclusion.",
+"The premise says studying happened.",
+"A conclusion follows."
+]
+},
+
+{
+topic:"REASONING",
+keyword:"DEDUCTIVE",
+q:"All nurses study anatomy. Ana is a nurse. Therefore Ana studies anatomy. This is...",
+options:["Inductive","Deductive","Circular","Invalid"],
+answer:1,
+why:"A general rule is applied to a specific case, so this is deductive reasoning.",
+choices:[
+"Inductive moves specific observations toward a generalization.",
+"Deductive moves general → specific.",
+"The argument is not circular.",
+"The structure is valid if the premises are accepted."
+]
+},
+
+/* ================= ALGEBRA ================= */
+
+{
+topic:"ALGEBRA",
+keyword:"LESS THAN",
+q:"Translate: x is 5 LESS THAN y.",
+options:["x=5y","x=y−5","x=y+5","x−5=y"],
+answer:1,
+why:"'5 less than y' means subtract 5 from y: x=y−5.",
+choices:[
+"5y means five times y.",
+"x=y−5 correctly translates the phrase.",
+"x=y+5 means five more.",
+"x−5=y means x is five greater."
+]
+},
+
+{
+topic:"ALGEBRA",
+keyword:"AT LEAST",
+q:"Translate: x is AT LEAST 7.",
+options:["x>7","x<7","x≥7","x≤7"],
+answer:2,
+why:"AT LEAST means 7 or greater, so x≥7.",
+choices:[
+"> excludes 7.",
+"< points downward.",
+"≥ includes 7 and larger values.",
+"≤ means AT MOST."
+]
+},
+
+{
+topic:"ALGEBRA",
+keyword:"AT MOST",
+q:"Translate: x is AT MOST 12.",
+options:["x≥12","x≤12","x>12","x=12 only"],
+answer:1,
+why:"AT MOST means 12 or less, so x≤12.",
+choices:[
+"≥ means 12 or greater.",
+"≤ includes 12 and values below it.",
+"> means greater than 12.",
+"At most includes values below 12."
+]
+},
+
+{
+topic:"ALGEBRA",
+keyword:"CONSECUTIVE",
+q:"Which pair represents consecutive integers?",
+options:["n,n+1","n,n+2","n,2n","n,n−3"],
+answer:0,
+why:"Consecutive integers differ by exactly 1.",
+choices:[
+"The difference is exactly 1.",
+"The difference is 2.",
+"2n is not necessarily one away.",
+"The difference is 3."
+]
+},
+
+{
+topic:"ALGEBRA",
+keyword:"TRANSLATION",
+q:"'Three times a number decreased by 4' is...",
+options:["3(x−4)","3x−4","x−12","4−3x"],
+answer:1,
+why:"Three times x is 3x, then decreased by 4 gives 3x−4.",
+choices:[
+"This multiplies the entire x−4 expression.",
+"This directly matches the phrase.",
+"This does not contain three times x.",
+"This reverses the order."
+]
+},
+
+{
+topic:"ALGEBRA",
+keyword:"INEQUALITY",
+q:"Which symbol means GREATER THAN OR EQUAL TO?",
+options:["≤","<","≥",">"],
+answer:2,
+why:"≥ means greater than OR equal to.",
+choices:[
+"≤ means less than or equal.",
+"< means less than.",
+"≥ means greater than or equal.",
+"> means strictly greater."
+]
+},
+
+{
+topic:"ALGEBRA",
+keyword:"WORD PROBLEM",
+q:"A number plus 8 equals 20. What is the number?",
+options:["10","12","18","28"],
+answer:1,
+why:"Let x be the number. x+8=20, so x=12.",
+choices:[
+"10+8=18.",
+"12+8=20.",
+"18+8=26.",
+"28+8=36."
+]
+},
+
+{
+topic:"ALGEBRA",
+keyword:"CONSECUTIVE",
+q:"The sum of two consecutive integers is 25. Which equation is correct?",
+options:[
+"x+(x+1)=25",
+"x+x=25",
+"x+(x+2)=25",
+"2x+1=20"
+],
+answer:0,
+why:"Consecutive integers are x and x+1, so their sum is x+(x+1)=25.",
+choices:[
+"This correctly represents consecutive integers.",
+"This represents equal numbers.",
+"x and x+2 differ by 2.",
+"The given sum is 25."
+]
+},
+
+/* ================= RELATIONS ================= */
+
+{
+topic:"RELATIONS",
+keyword:"ORDERED PAIR",
+q:"In (4,9), what is the FIRST coordinate?",
+options:["4","9","13","36"],
+answer:0,
+why:"In (x,y), x is the first coordinate and y is the second.",
+choices:[
+"4 is first.",
+"9 is second.",
+"13 is the sum.",
+"36 is the product."
+]
+},
+
+{
+topic:"RELATIONS",
+keyword:"DOMAIN",
+q:"For R={(1,5),(2,6),(3,7)}, what is the DOMAIN?",
+options:["{5,6,7}","{1,2,3}","{1,5,2}","{3,6,7}"],
+answer:1,
+why:"Domain = FIRST coordinates.",
+choices:[
+"These are second coordinates.",
+"These are first coordinates.",
+"This mixes coordinates.",
+"This is not the first-coordinate set."
+]
+},
+
+{
+topic:"RELATIONS",
+keyword:"RANGE",
+q:"For R={(1,5),(2,6),(3,7)}, what is the RANGE?",
+options:["{1,2,3}","{5,6,7}","{1,5,7}","{2,3,6}"],
+answer:1,
+why:"Range = SECOND coordinates.",
+choices:[
+"These are domain values.",
+"These are second coordinates.",
+"This mixes coordinates.",
+"This is not the range."
+]
+},
+
+{
+topic:"RELATIONS",
+keyword:"DOMAIN",
+q:"The DOMAIN comes from the...",
+options:["First coordinates","Second coordinates","Products","Sums"],
+answer:0,
+why:"Domain = first coordinates, usually the x-values.",
+choices:[
+"Correct: domain uses first coordinates.",
+"Second coordinates form the range.",
+"Products are irrelevant.",
+"Sums are irrelevant."
+]
+},
+
+{
+topic:"RELATIONS",
+keyword:"RANGE",
+q:"The RANGE comes from the...",
+options:["First coordinates","Second coordinates","Inputs only","Set size"],
+answer:1,
+why:"Range = second coordinates, usually the y-values.",
+choices:[
+"First coordinates form the domain.",
+"Second coordinates form the range.",
+"Inputs correspond to the domain.",
+"Set size does not define range."
+]
+},
+
+/* ================= FUNCTIONS ================= */
+
+{
+topic:"FUNCTIONS",
+keyword:"FUNCTION",
+q:"A relation is a FUNCTION when each input has...",
+options:[
+"Exactly one output",
+"At least two outputs",
+"No output",
+"Exactly two outputs"
+],
+answer:0,
+why:"A function assigns exactly ONE output to each input.",
+choices:[
+"This is the defining rule.",
+"Two outputs for one input violates the rule.",
+"No output violates the rule.",
+"Two outputs are not required."
+]
+},
+
+{
+topic:"FUNCTIONS",
+keyword:"FUNCTION",
+q:"Which relation is NOT a function?",
+options:[
+"{(1,2),(2,3)}",
+"{(1,2),(2,4)}",
+"{(1,2),(1,5)}",
+"{(2,3),(3,4)}"
+],
+answer:2,
+why:"The input 1 maps to both 2 and 5. One input cannot have two different outputs.",
+choices:[
+"Each input has one output.",
+"Each input has one output.",
+"Input 1 has two outputs, so it is not a function.",
+"Each input has one output."
+]
+},
+
+{
+topic:"FUNCTIONS",
+keyword:"REPEATED OUTPUT",
+q:"Can different inputs have the SAME output in a function?",
+options:["Yes","No","Only once","Never"],
+answer:0,
+why:"Yes. Different x-values may map to the same y-value. The restriction is one output per input.",
+choices:[
+"Different inputs may share an output.",
+"Functions do not forbid repeated y-values.",
+"There is no one-time restriction.",
+"Repeated outputs are allowed."
+]
+},
+
+{
+topic:"FUNCTIONS",
+keyword:"REPEATED INPUT",
+q:"Can one input x map to TWO different y-values in a function?",
+options:["Yes","No","Sometimes","Only integers"],
+answer:1,
+why:"No. A function must assign exactly one output to each input.",
+choices:[
+"Two outputs for one input violate the rule.",
+"No is correct.",
+"There is no exception here.",
+"The rule is not limited to integers."
+]
+},
+
+{
+topic:"FUNCTIONS",
+keyword:"VERTICAL LINE TEST",
+q:"The Vertical Line Test determines whether a graph represents a...",
+options:["Set","Function","Union","Subset"],
+answer:1,
+why:"If a vertical line hits the graph more than once, one x has multiple y-values, so it is not a function.",
+choices:[
+"A set can be represented many ways.",
+"The test checks the function rule.",
+"Union is a set operation.",
+"Subset is a set relationship."
+]
+},
+
+{
+topic:"FUNCTIONS",
+keyword:"INPUT → OUTPUT",
+q:"If f(3)=8, what is the OUTPUT when the INPUT is 3?",
+options:["3","5","8","11"],
+answer:2,
+why:"f(3)=8 directly states that input 3 produces output 8.",
+choices:[
+"3 is the input.",
+"5 is not given.",
+"8 is the output.",
+"11 is not given."
+]
+}
+
+];
+
+
+/* =========================================================
+   TRUTH TABLE GENERATORS
+========================================================= */
+
+const TRUTH_TYPES=[
+
+{
+expression:"~p",
+keyword:"NOT",
+variables:["p"],
+columns:["~p"],
+evaluator:(p)=>[!p]
+},
+
+{
+expression:"p ∧ q",
+keyword:"AND",
+variables:["p","q"],
+columns:["p ∧ q"],
+evaluator:(p,q)=>[p&&q]
+},
+
+{
+expression:"p ∨ q",
+keyword:"OR",
+variables:["p","q"],
+columns:["p ∨ q"],
+evaluator:(p,q)=>[p||q]
+},
+
+{
+expression:"p → q",
+keyword:"IF...THEN",
+variables:["p","q"],
+columns:["p → q"],
+evaluator:(p,q)=>[(!p)||q]
+},
+
+{
+expression:"p ↔ q",
+keyword:"IF AND ONLY IF",
+variables:["p","q"],
+columns:["p ↔ q"],
+evaluator:(p,q)=>[p===q]
+},
+
+{
+expression:"~p ∨ q",
+keyword:"NOT + OR",
+variables:["p","q"],
+columns:["~p","~p ∨ q"],
+evaluator:(p,q)=>{
+    const np=!p;
+    return [np,np||q];
+}
+},
+
+{
+expression:"~(p ∧ q)",
+keyword:"NOT + AND",
+variables:["p","q"],
+columns:["p ∧ q","~(p ∧ q)"],
+evaluator:(p,q)=>{
+    const a=p&&q;
+    return [a,!a];
+}
+},
+
+{
+expression:"(p ∨ q) ∧ p",
+keyword:"OR + AND",
+variables:["p","q"],
+columns:["p ∨ q","(p ∨ q) ∧ p"],
+evaluator:(p,q)=>{
+    const a=p||q;
+    return [a,a&&p];
+}
+},
+
+{
+expression:"(p → q) ∧ p",
+keyword:"IF...THEN + AND",
+variables:["p","q"],
+columns:["p → q","(p → q) ∧ p"],
+evaluator:(p,q)=>{
+    const a=(!p)||q;
+    return [a,a&&p];
+}
+}
+
+];
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let selectedTopic="ALL";
+let mode="mixed";
+let requestedCount=20;
+
+let quizItems=[];
+let currentIndex=0;
+
+let score=0;
+let streak=0;
+let correct=0;
+let wrong=0;
+
+let startTime=0;
+let timerInterval=null;
+
+let mistakes=[];
+
+let truthState=null;
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const home=document.getElementById("home");
+const quiz=document.getElementById("quiz");
+const end=document.getElementById("end");
+
+const modeSelect=document.getElementById("modeSelect");
+const countSelect=document.getElementById("countSelect");
+const startBtn=document.getElementById("startBtn");
+
+const normalQuestion=document.getElementById("normalQuestion");
+const truthQuestion=document.getElementById("truthQuestion");
+
+const progressText=document.getElementById("progressText");
+const progressBar=document.getElementById("progressBar");
+
+const timerText=document.getElementById("timerText");
+const scoreText=document.getElementById("scoreText");
+const streakText=document.getElementById("streakText");
+const correctText=document.getElementById("correctText");
+
+const topicBadge=document.getElementById("topicBadge");
+const keywordBadge=document.getElementById("keywordBadge");
+
+const questionText=document.getElementById("questionText");
+const choices=document.getElementById("choices");
+const normalResult=document.getElementById("normalResult");
+
+const nextBtn=document.getElementById("nextBtn");
+const quitBtn=document.getElementById("quitBtn");
+
+const truthExpression=document.getElementById("truthExpression");
+const truthKeyword=document.getElementById("truthKeyword");
+const truthTable=document.getElementById("truthTable");
+const truthResult=document.getElementById("truthResult");
+
+const checkTruthBtn=document.getElementById("checkTruthBtn");
+const nextTruthBtn=document.getElementById("nextTruthBtn");
+const truthQuitBtn=document.getElementById("truthQuitBtn");
+
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+function shuffle(array){
+
+    const a=[...array];
+
+    for(let i=a.length-1;i>0;i--){
+
+        const j=Math.floor(Math.random()*(i+1));
+
+        [a[i],a[j]]=[a[j],a[i]];
+    }
+
+    return a;
+}
+
+
+function escapeHTML(str){
+
+    return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+
+function formatTime(seconds){
+
+    seconds=Math.max(0,Math.floor(seconds));
+
+    const minutes=String(
+        Math.floor(seconds/60)
+    ).padStart(2,"0");
+
+    const secs=String(
+        seconds%60
+    ).padStart(2,"0");
+
+    return `${minutes}:${secs}`;
+}
+
+
+function getTopicLabel(topic){
+
+    const labels={
+        LOGIC:"LOGIC",
+        SETS:"SETS",
+        VENN:"VENN & OPERATIONS",
+        BINARY:"BINARY OPERATIONS",
+        REASONING:"REASONING",
+        ALGEBRA:"ALGEBRA",
+        RELATIONS:"RELATIONS",
+        FUNCTIONS:"FUNCTIONS"
+    };
+
+    return labels[topic]||topic;
+}
+
+
+/* =========================================================
+   TOPIC BUTTONS
+========================================================= */
+
+document.querySelectorAll(".topic-btn").forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        document.querySelectorAll(".topic-btn")
+            .forEach(b=>b.classList.remove("active"));
+
+        button.classList.add("active");
+
+        selectedTopic=button.dataset.topic;
+    });
+
+});
+
+
+/* =========================================================
+   START GAME
+========================================================= */
+
+startBtn.addEventListener("click",startGame);
+
+
+function startGame(){
+
+    mode=modeSelect.value;
+    requestedCount=Number(countSelect.value);
+
+    let pool=QUESTIONS;
+
+    if(selectedTopic!=="ALL"){
+
+        pool=QUESTIONS.filter(
+            q=>q.topic===selectedTopic
+        );
+
+    }
+
+
+    let items=[];
+
+
+    /* NORMAL */
+
+    if(mode==="normal"){
+
+        const selected=shuffle(pool);
+
+        for(let i=0;i<requestedCount;i++){
+
+            items.push({
+                type:"normal",
+                data:selected[i%selected.length]
+            });
+
+        }
+
+    }
+
+
+    /* TRUTH */
+
+    else if(mode==="truth"){
+
+        for(let i=0;i<requestedCount;i++){
+
+            items.push({
+                type:"truth",
+                data:shuffle(TRUTH_TYPES)[0]
+            });
+
+        }
+
+    }
+
+
+    /* MIXED */
+
+    else{
+
+        const truthCount=Math.max(
+            2,
+            Math.round(requestedCount*.3)
+        );
+
+        const normalCount=requestedCount-truthCount;
+
+        const normalPool=shuffle(pool);
+
+        for(let i=0;i<normalCount;i++){
+
+            items.push({
+                type:"normal",
+                data:normalPool[i%normalPool.length]
+            });
+
+        }
+
+        for(let i=0;i<truthCount;i++){
+
+            items.push({
+                type:"truth",
+                data:shuffle(TRUTH_TYPES)[0]
+            });
+
+        }
+
+        items=shuffle(items);
+
+    }
+
+
+    quizItems=items;
+
+    currentIndex=0;
+    score=0;
+    streak=0;
+    correct=0;
+    wrong=0;
+    mistakes=[];
+
+    startTime=Date.now();
+
+    home.classList.add("hidden");
+    end.classList.add("hidden");
+    quiz.classList.remove("hidden");
+
+    updateStats();
+    startTimer();
+    renderCurrent();
+
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function startTimer(){
+
+    clearInterval(timerInterval);
+
+    timerInterval=setInterval(()=>{
+
+        const elapsed=Math.floor(
+            (Date.now()-startTime)/1000
+        );
+
+        timerText.textContent=formatTime(elapsed);
+
+    },1000);
+
+}
+
+
+/* =========================================================
+   RENDER CURRENT
+========================================================= */
+
+function renderCurrent(){
+
+    if(currentIndex>=quizItems.length){
+
+        finishGame();
+        return;
+
+    }
+
+
+    const item=quizItems[currentIndex];
+
+    const progress=
+        (currentIndex/quizItems.length)*100;
+
+    progressBar.style.width=progress+"%";
+
+    progressText.textContent=
+        `Question ${currentIndex+1} / ${quizItems.length}`;
+
+
+    normalQuestion.classList.toggle(
+        "hidden",
+        item.type!=="normal"
+    );
+
+    truthQuestion.classList.toggle(
+        "hidden",
+        item.type!=="truth"
+    );
+
+
+    if(item.type==="normal"){
+
+        renderNormal(item.data);
+
+    }else{
+
+        renderTruth(item.data);
+
+    }
+
+}
+
+
+/* =========================================================
+   NORMAL QUESTION
+========================================================= */
+
+function renderNormal(q){
+
+    topicBadge.textContent=
+        getTopicLabel(q.topic);
+
+    keywordBadge.textContent=
+        "KEYWORD: "+q.keyword;
+
+    questionText.innerHTML=q.q;
+
+    choices.innerHTML="";
+    normalResult.innerHTML="";
+
+    nextBtn.classList.add("hidden");
+
+
+    const optionObjects=q.options.map(
+        (text,index)=>({
+            text,
+            original:index
+        })
+    );
+
+
+    const shuffled=shuffle(optionObjects);
+
+
+    shuffled.forEach((option,index)=>{
+
+        const button=document.createElement("button");
+
+        button.type="button";
+
+        button.className="choice";
+
+        button.innerHTML=`
+            <span class="choice-letter">
+                ${String.fromCharCode(65+index)}
+            </span>
+            ${escapeHTML(option.text)}
+        `;
+
+
+        button.addEventListener(
+            "click",
+            ()=>answerNormal(
+                q,
+                option.original,
+                button,
+                shuffled
+            )
+        );
+
+
+        choices.appendChild(button);
+
+    });
+
+}
+
+
+/* =========================================================
+   NORMAL ANSWER
+========================================================= */
+
+function answerNormal(
+    q,
+    selectedIndex,
+    clickedButton,
+    shuffled
+){
+
+    const buttons=[
+        ...choices.querySelectorAll(".choice")
+    ];
+
+
+    buttons.forEach(button=>{
+
+        button.disabled=true;
+        button.classList.add("disabled");
+
+    });
+
+
+    const isCorrect=
+        selectedIndex===q.answer;
+
+
+    if(isCorrect){
+
+        correct++;
+        streak++;
+
+        score+=100+(streak*10);
+
+        clickedButton.classList.add("correct");
+
+    }else{
+
+        wrong++;
+        streak=0;
+
+        clickedButton.classList.add("wrong");
+
+
+        const correctPosition=
+            shuffled.findIndex(
+                x=>x.original===q.answer
+            );
+
+
+        if(correctPosition>=0){
+
+            buttons[correctPosition]
+                .classList.add("correct");
+
+        }
+
+
+        mistakes.push({
+
+            question:q.q,
+
+            your:q.options[selectedIndex],
+
+            correct:q.options[q.answer],
+
+            why:q.why
+
+        });
+
+    }
+
+
+    const yourAnswer=
+        q.options[selectedIndex];
+
+    const correctAnswer=
+        q.options[q.answer];
+
+
+    let html=`
+
+        <div class="result ${isCorrect?"good":"bad"}">
+
+            <div class="result-title">
+
+                ${
+                    isCorrect
+                    ? "✓ CORRECT — LOGIC CONFIRMED"
+                    : "✕ INCORRECT — CHECK THE KEYWORD"
+                }
+
+            </div>
+
+
+            <div class="answer-line">
+
+                <b>Your answer:</b>
+                ${escapeHTML(yourAnswer)}
+
+                <br>
+
+                ${
+                    isCorrect
+                    ? "Your answer matches the rule being tested."
+                    : "Your answer does not match the rule being tested."
+                }
+
+            </div>
+
+
+            <div class="answer-line">
+
+                <b>Correct answer:</b>
+                ${escapeHTML(correctAnswer)}
+
+                <br>
+
+                ${escapeHTML(q.why)}
+
+            </div>
+
+
+            <div class="explanation">
+
+                <b style="color:var(--gold2)">
+                    WHY:
+                </b>
+
+                ${escapeHTML(q.why)}
+
+            </div>
+
+
+            <div class="choice-breakdown">
+    `;
+
+
+    q.options.forEach((option,index)=>{
+
+        const position=
+            shuffled.findIndex(
+                x=>x.original===index
+            );
+
+        html+=`
+
+            <div class="breakdown-item">
+
+                <b>
+                    ${String.fromCharCode(65+position)}.
+                </b>
+
+                ${escapeHTML(option)}
+
+                —
+                ${escapeHTML(q.choices[index])}
+
+            </div>
+
+        `;
+
+    });
+
+
+    html+=`
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    normalResult.innerHTML=html;
+
+    nextBtn.classList.remove("hidden");
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   TRUTH TABLE RENDER
+========================================================= */
+
+function renderTruth(type){
+
+    truthExpression.textContent=
+        type.expression;
+
+    truthKeyword.textContent=
+        "KEYWORD: "+type.keyword;
+
+    truthResult.innerHTML="";
+
+    checkTruthBtn.classList.remove("hidden");
+    nextTruthBtn.classList.add("hidden");
+
+
+    const rows=
+        type.variables.length===1
+
+        ? [
+            [true],
+            [false]
+        ]
+
+        : [
+            [true,true],
+            [true,false],
+            [false,true],
+            [false,false]
+        ];
+
+
+    truthState={
+        type,
+        rows,
+        checked:false
+    };
+
+
+    let html="<thead><tr>";
+
+
+    type.variables.forEach(variable=>{
+
+        html+=`
+            <th>
+                ${variable}
+            </th>
+        `;
+
+    });
+
+
+    type.columns.forEach(column=>{
+
+        html+=`
+            <th>
+                ${column}
+            </th>
+        `;
+
+    });
+
+
+    html+="</tr></thead><tbody>";
+
+
+    rows.forEach((row,rowIndex)=>{
+
+        html+="<tr>";
+
+
+        row.forEach(value=>{
+
+            html+=`
+                <td>
+                    <b>${value?"T":"F"}</b>
+                </td>
+            `;
+
+        });
+
+
+        type.columns.forEach(
+            (column,columnIndex)=>{
+
+                const key=
+                    `${rowIndex}-${columnIndex}`;
+
+
+                html+=`
+
+                    <td>
+
+                        <input
+                            class="truth-input"
+                            type="text"
+                            maxlength="1"
+                            inputmode="text"
+                            autocomplete="off"
+                            autocapitalize="characters"
+                            spellcheck="false"
+                            data-key="${key}"
+                            aria-label="Truth value row ${rowIndex+1}, ${column}"
+                        >
+
+                        <div class="cell-label">
+                            T / F
+                        </div>
+
+                    </td>
+
+                `;
+
+            }
+        );
+
+
+        html+="</tr>";
+
+    });
+
+
+    html+="</tbody>";
+
+
+    truthTable.innerHTML=html;
+
+
+    const inputs=[
+        ...truthTable.querySelectorAll(".truth-input")
+    ];
+
+
+    inputs.forEach((input,index)=>{
+
+
+        /* ONLY ALLOW T/F */
+
+        input.addEventListener(
+            "input",
+            ()=>{
+
+                input.value=
+                    input.value
+                    .toUpperCase()
+                    .replace(/[^TF]/g,"")
+                    .slice(0,1);
+
+                input.classList.remove(
+                    "invalid-cell",
+                    "wrong-cell",
+                    "correct-cell"
+                );
+
+            }
+        );
+
+
+        /* TAB NATURALLY MOVES TO NEXT CELL */
+
+
+        /* ENTER MOVES TO NEXT CELL */
+
+        input.addEventListener(
+            "keydown",
+            event=>{
+
+                if(event.key==="Enter"){
+
+                    event.preventDefault();
+
+                    const next=
+                        inputs[index+1];
+
+                    if(next){
+
+                        next.focus();
+                        next.select();
+
+                    }
+
+                }
+
+            }
+        );
+
+    });
+
+
+    if(inputs.length>0){
+
+        setTimeout(()=>{
+            inputs[0].focus();
+        },50);
+
+    }
+
+}
+
+
+/* =========================================================
+   CHECK TRUTH TABLE
+========================================================= */
+
+checkTruthBtn.addEventListener(
+    "click",
+    checkTruth
+);
+
+
+function checkTruth(){
+
+    if(!truthState || truthState.checked){
+        return;
+    }
+
+
+    const inputs=[
+        ...truthTable.querySelectorAll(".truth-input")
+    ];
+
+
+    /* CHECK EMPTY / INVALID */
+
+    let invalid=false;
+
+
+    inputs.forEach(input=>{
+
+        input.classList.remove(
+            "invalid-cell",
+            "wrong-cell",
+            "correct-cell"
+        );
+
+
+        const value=
+            input.value.trim().toUpperCase();
+
+
+        if(value!=="T" && value!=="F"){
+
+            input.classList.add("invalid-cell");
+
+            invalid=true;
+
+        }
+
+    });
+
+
+    if(invalid){
+
+        truthResult.innerHTML=`
+
+            <div class="result bad">
+
+                <div class="result-title">
+                    ⚠ INVALID TABLE
+                </div>
+
+                <div class="explanation">
+
+                    Every answer cell must contain
+                    <b style="color:var(--green)">T</b>
+                    or
+                    <b style="color:var(--red)">F</b>.
+
+                    Red-outlined cells are empty or invalid.
+
+                </div>
+
+            </div>
+
+        `;
+
+        const firstInvalid=
+            inputs.find(
+                input=>input.value.trim()===""
+                || !/^[TF]$/i.test(input.value.trim())
+            );
+
+        if(firstInvalid){
+            firstInvalid.focus();
+        }
+
+        return;
+
+    }
+
+
+    const type=truthState.type;
+    const rows=truthState.rows;
+
+
+    let totalCells=
+        rows.length*type.columns.length;
+
+    let correctCells=0;
+
+    let cellIndex=0;
+
+
+    rows.forEach((row,rowIndex)=>{
+
+        const correctValues=
+            type.evaluator(...row);
+
+
+        correctValues.forEach(
+            (correctValue,columnIndex)=>{
+
+                const input=inputs[cellIndex];
+
+                const userValue=
+                    input.value.trim().toUpperCase();
+
+                const userBoolean=
+                    userValue==="T";
+
+
+                if(userBoolean===correctValue){
+
+                    correctCells++;
+
+                    input.classList.add(
+                        "correct-cell"
+                    );
+
+                }else{
+
+                    input.classList.add(
+                        "wrong-cell"
+                    );
+
+                }
+
+
+                cellIndex++;
+
+            }
+        );
+
+    });
+
+
+    truthState.checked=true;
+
+
+    const perfect=
+        correctCells===totalCells;
+
+
+    if(perfect){
+
+        correct++;
+        streak++;
+
+        score+=150+(streak*15);
+
+    }else{
+
+        wrong++;
+        streak=0;
+
+
+        mistakes.push({
+
+            question:
+                `Truth Table: ${type.expression}`,
+
+            your:
+                `${correctCells}/${totalCells} cells correct`,
+
+            correct:
+                "Complete truth table",
+
+            why:
+                getTruthExplanation(type)
+
+        });
+
+    }
+
+
+    const percent=
+        Math.round(
+            (correctCells/totalCells)*100
+        );
+
+
+    /*
+       Build cell-by-cell explanation
+    */
+
+    let cellExplanation="";
+
+    cellIndex=0;
+
+
+    rows.forEach((row,rowIndex)=>{
+
+        const correctValues=
+            type.evaluator(...row);
+
+
+        correctValues.forEach(
+            (correctValue,columnIndex)=>{
+
+                const input=inputs[cellIndex];
+
+                const userValue=
+                    input.value.trim().toUpperCase();
+
+                const expected=
+                    correctValue?"T":"F";
+
+                const correctCell=
+                    userValue===expected;
+
+
+                cellExplanation+=`
+
+                    <div class="breakdown-item">
+
+                        Row ${rowIndex+1},
+                        <b>${type.columns[columnIndex]}</b>:
+
+                        Your answer =
+                        <b style="color:${
+                            correctCell
+                            ?"var(--green)"
+                            :"var(--red)"
+                        }">
+                            ${userValue}
+                        </b>
+
+                        |
+
+                        Correct =
+                        <b style="color:var(--green)">
+                            ${expected}
+                        </b>
+
+                        —
+
+                        ${
+                            explainTruthCell(
+                                type.keyword,
+                                row,
+                                correctValue,
+                                correctCell
+                            )
+                        }
+
+                    </div>
+
+                `;
+
+
+                cellIndex++;
+
+            }
+        );
+
+    });
+
+
+    truthResult.innerHTML=`
+
+        <div class="result ${perfect?"good":"bad"}">
+
+            <div class="result-title">
+
+                ${
+                    perfect
+                    ? "✓ PERFECT TABLE — LOGIC MASTERED"
+                    : "✕ TABLE HAS ERRORS — CHECK THE RED CELLS"
+                }
+
+            </div>
+
+
+            <div class="answer-line">
+
+                <b>Your result:</b>
+
+                ${correctCells}/${totalCells}
+                cells correct
+                (${percent}%)
+
+            </div>
+
+
+            <div class="answer-line">
+
+                <b>Rule:</b>
+
+                ${escapeHTML(
+                    getTruthExplanation(type)
+                )}
+
+            </div>
+
+
+            <div class="explanation">
+
+                <b style="color:var(--gold2)">
+                    CELL-BY-CELL REVIEW:
+                </b>
+
+            </div>
+
+
+            <div class="choice-breakdown">
+
+                ${cellExplanation}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    checkTruthBtn.classList.add("hidden");
+    nextTruthBtn.classList.remove("hidden");
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   TRUTH CELL EXPLANATIONS
+========================================================= */
+
+function explainTruthCell(
+    keyword,
+    row,
+    correctValue,
+    correctCell
+){
+
+    const p=row[0];
+    const q=row.length>1 ? row[1] : null;
+
+    let base="";
+
+
+    if(keyword==="NOT"){
+
+        base=
+            `~ flips ${p?"T to F":"F to T"}.`;
+
+    }
+
+    else if(keyword==="AND"){
+
+        base=
+            `AND is TRUE only when both inputs are TRUE.`;
+
+    }
+
+    else if(keyword==="OR"){
+
+        base=
+            `OR is TRUE when at least one input is TRUE.`;
+
+    }
+
+    else if(keyword==="IF...THEN"){
+
+        base=
+            `IF...THEN is FALSE only for T → F.`;
+
+    }
+
+    else if(keyword==="IF AND ONLY IF"){
+
+        base=
+            `IF AND ONLY IF is TRUE when both values match.`;
+
+    }
+
+    else if(keyword==="NOT + OR"){
+
+        base=
+            `Evaluate ~p first, then apply OR.`;
+
+    }
+
+    else if(keyword==="NOT + AND"){
+
+        base=
+            `Evaluate p ∧ q first, then apply NOT.`;
+
+    }
+
+    else if(keyword==="OR + AND"){
+
+        base=
+            `Evaluate the OR expression first, then apply AND.`;
+
+    }
+
+    else if(keyword==="IF...THEN + AND"){
+
+        base=
+            `Evaluate p → q first, then combine with p using AND.`;
+
+    }
+
+    if(correctCell){
+
+        return base;
+
+    }
+
+    return `
+        Your T/F value does not match the rule.
+        ${base}
+    `;
+
+}
+
+
+/* =========================================================
+   TRUTH RULE EXPLANATIONS
+========================================================= */
+
+function getTruthExplanation(type){
+
+    const explanations={
+
+        "NOT":
+            "~ means NOT, so the truth value is reversed.",
+
+        "AND":
+            "∧ means AND. TRUE only when both p and q are TRUE.",
+
+        "OR":
+            "∨ means OR. TRUE when at least one input is TRUE.",
+
+        "IF...THEN":
+            "→ means IF...THEN. FALSE only when p=T and q=F.",
+
+        "IF AND ONLY IF":
+            "↔ means IF AND ONLY IF. TRUE when p and q have the same value.",
+
+        "NOT + OR":
+            "Evaluate ~p first, then use OR. OR is TRUE when at least one value is TRUE.",
+
+        "NOT + AND":
+            "Evaluate p ∧ q first, then reverse the result using ~.",
+
+        "OR + AND":
+            "Evaluate the parenthesized OR expression first, then apply AND.",
+
+        "IF...THEN + AND":
+            "Evaluate p → q first, then combine its result with p using AND."
+
+    };
+
+    return explanations[type.keyword] ||
+        "Evaluate each logical operator according to its keyword.";
+
+}
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+nextBtn.addEventListener(
+    "click",
+    ()=>{
+        currentIndex++;
+        renderCurrent();
+    }
+);
+
+
+nextTruthBtn.addEventListener(
+    "click",
+    ()=>{
+        currentIndex++;
+        renderCurrent();
+    }
+);
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+    scoreText.textContent=score;
+    streakText.textContent=streak;
+    correctText.textContent=correct;
+
+}
+
+
+/* =========================================================
+   QUIT
+========================================================= */
+
+quitBtn.addEventListener(
+    "click",
+    quitGame
+);
+
+truthQuitBtn.addEventListener(
+    "click",
+    quitGame
+);
+
+
+function quitGame(){
+
+    const confirmed=
+        confirm(
+            "Leave the academy trial? Your current run will be lost."
+        );
+
+    if(!confirmed){
+        return;
+    }
+
+
+    clearInterval(timerInterval);
+
+    quiz.classList.add("hidden");
+    end.classList.add("hidden");
+    home.classList.remove("hidden");
+
+}
+
+
+/* =========================================================
+   FINISH
+========================================================= */
+
+function finishGame(){
+
+    clearInterval(timerInterval);
+
+    progressBar.style.width="100%";
+
+    quiz.classList.add("hidden");
+    end.classList.remove("hidden");
+
+
+    const total=
+        correct+wrong;
+
+
+    const accuracy=
+        total
+        ? Math.round((correct/total)*100)
+        : 0;
+
+
+    const bestKey=
+        "mmwAcademyBest";
+
+
+    let oldBest=0;
+
+
+    try{
+
+        oldBest=
+            Number(
+                localStorage.getItem(bestKey)||0
+            );
+
+        if(score>oldBest){
+
+            localStorage.setItem(
+                bestKey,
+                String(score)
+            );
+
+        }
+
+    }catch(error){
+
+        oldBest=0;
+
+    }
+
+
+    const best=
+        Math.max(score,oldBest);
+
+
+    document.getElementById(
+        "finalScore"
+    ).textContent=score;
+
+
+    document.getElementById(
+        "finalCorrect"
+    ).textContent=correct;
+
+
+    document.getElementById(
+        "finalWrong"
+    ).textContent=wrong;
+
+
+    document.getElementById(
+        "finalAccuracy"
+    ).textContent=accuracy+"%";
+
+
+    document.getElementById(
+        "finalBest"
+    ).textContent=best;
+
+
+    let message;
+
+
+    if(accuracy>=90){
+
+        message=
+            "🏛️ <b>ARCHON LEVEL.</b> Your mathematical reasoning is sharp.";
+
+    }
+
+    else if(accuracy>=75){
+
+        message=
+            "⚔️ <b>SCHOLAR LEVEL.</b> Solid work. Keep sharpening the weak areas.";
+
+    }
+
+    else if(accuracy>=60){
+
+        message=
+            "📜 <b>APPRENTICE LEVEL.</b> You understand parts of the system. Review the rules.";
+
+    }
+
+    else{
+
+        message=
+            "🔱 <b>THE ACADEMY DEMANDS MORE.</b> Study the keywords, then challenge it again.";
+
+    }
+
+
+    document.getElementById(
+        "finalMessage"
+    ).innerHTML=
+        `<p style="color:var(--muted)">${message}</p>`;
+
+
+    renderMistakes();
+
+}
+
+
+/* =========================================================
+   MISTAKES
+========================================================= */
+
+function renderMistakes(){
+
+    const container=
+        document.getElementById("mistakes");
+
+
+    if(mistakes.length===0){
+
+        container.innerHTML=`
+
+            <div class="result good">
+
+                <div class="result-title">
+                    PERFECT RUN
+                </div>
+
+                <div class="explanation">
+                    No mistakes were recorded.
+                    Every challenge was answered correctly.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let html=`
+
+        <h3 class="section-title">
+            📜 Review Your Mistakes
+        </h3>
+
+    `;
+
+
+    mistakes.forEach((mistake,index)=>{
+
+        html+=`
+
+            <div class="mistake">
+
+                <strong>
+                    ${index+1}.
+                    ${escapeHTML(mistake.question)}
+                </strong>
+
+
+                <div
+                    style="
+                        margin-top:8px;
+                        color:var(--red);
+                    "
+                >
+
+                    Your answer:
+                    ${escapeHTML(mistake.your)}
+
+                </div>
+
+
+                <div
+                    style="
+                        margin-top:5px;
+                        color:var(--green);
+                    "
+                >
+
+                    Correct:
+                    ${escapeHTML(mistake.correct)}
+
+                </div>
+
+
+                <div
+                    style="
+                        margin-top:8px;
+                        color:var(--muted);
+                    "
+                >
+
+                    ${escapeHTML(mistake.why)}
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    container.innerHTML=html;
+
+}
+
+
+/* =========================================================
+   END BUTTONS
+========================================================= */
+
+document.getElementById(
+    "againBtn"
+).addEventListener(
+    "click",
+    ()=>{
+        end.classList.add("hidden");
+        home.classList.remove("hidden");
+    }
+);
+
+
+document.getElementById(
+    "homeBtn"
+).addEventListener(
+    "click",
+    ()=>{
+        end.classList.add("hidden");
+        home.classList.remove("hidden");
+    }
+);
+
+
+/* =========================================================
+   KEYBOARD SHORTCUTS
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    event=>{
+
+        if(quiz.classList.contains("hidden")){
+            return;
+        }
+
+
+        const tag=
+            document.activeElement?.tagName;
+
+
+        /*
+           Do NOT steal keyboard input from
+           the T/F table inputs.
+        */
+
+        if(
+            tag==="INPUT" ||
+            tag==="TEXTAREA" ||
+            tag==="SELECT"
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            !normalQuestion.classList.contains("hidden")
+            &&
+            normalResult.innerHTML===""
+
+        ){
+
+            const key=
+                event.key.toLowerCase();
+
+
+            if(
+                ["a","b","c","d"].includes(key)
+            ){
+
+                const index=
+                    "abcd".indexOf(key);
+
+
+                const button=
+                    choices.querySelectorAll(
+                        ".choice"
+                    )[index];
+
+
+                if(button){
+                    button.click();
+                }
+
+            }
+
+        }
+
+
+        else if(
+            !normalQuestion.classList.contains("hidden")
+            &&
+            event.key==="Enter"
+            &&
+            !nextBtn.classList.contains("hidden")
+        ){
+
+            nextBtn.click();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+timerText.textContent="00:00";
+
+updateStats();
+
+</script>
+
+</body>
+</html>
